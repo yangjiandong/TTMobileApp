@@ -1,9 +1,9 @@
-
 #import "AppDelegate.h"
-#import "ViewController.h"
-#import "Config.h"
 #import "UIColor+Util.h"
 #import "UIView+Util.h"
+#import "SideMenuViewController.h"
+#import "RESideMenu.h"
+#import "MainTabBarController.h"
 
 @interface AppDelegate ()
 
@@ -14,9 +14,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    ViewController *vctl = [[ViewController alloc] init];
+    MainTabBarController *vctl = [[MainTabBarController alloc] init];
+
+    RESideMenu *sideMenuTabBarViewController = [[RESideMenu alloc] initWithContentViewController:vctl
+                                                                          leftMenuViewController:[SideMenuViewController new]
+                                                                         rightMenuViewController:nil];
+    sideMenuTabBarViewController.scaleContentView = YES;
+    sideMenuTabBarViewController.contentViewScaleValue = 0.95;
+    sideMenuTabBarViewController.scaleMenuView = NO;
+    sideMenuTabBarViewController.contentViewShadowEnabled = YES;
+    sideMenuTabBarViewController.contentViewShadowRadius = 4.5;
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = vctl;
+    self.window.rootViewController = sideMenuTabBarViewController;
     [self.window makeKeyAndVisible];
 
     [self loadCookies];
@@ -25,12 +35,12 @@
 
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
-    NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 
     [[UITabBar appearance] setTintColor:[UIColor colorWithHex:0x15A230]];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x15A230]} forState:UIControlStateSelected];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithHex:0x15A230]} forState:UIControlStateSelected];
 
     [[UINavigationBar appearance] setBarTintColor:[UIColor navigationbarColor]];
     [[UITabBar appearance] setBarTintColor:[UIColor titleBarColor]];
@@ -45,7 +55,7 @@
     pageControl.currentPageIndicatorTintColor = [UIColor grayColor];
 
     [[UITextField appearance] setTintColor:[UIColor nameColor]];
-    [[UITextView appearance]  setTintColor:[UIColor nameColor]];
+    [[UITextView appearance] setTintColor:[UIColor nameColor]];
 
 
     UIMenuController *menuController = [UIMenuController sharedMenuController];
@@ -74,13 +84,12 @@
 }
 
 
-- (void)loadCookies
-{
-    NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData: [[NSUserDefaults standardUserDefaults] objectForKey: @"sessionCookies"]];
+- (void)loadCookies {
+    NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"sessionCookies"]];
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
 
-    for (NSHTTPCookie *cookie in cookies){
-        [cookieStorage setCookie: cookie];
+    for (NSHTTPCookie *cookie in cookies) {
+        [cookieStorage setCookie:cookie];
     }
 
 }
