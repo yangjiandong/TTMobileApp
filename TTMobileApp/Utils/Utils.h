@@ -35,7 +35,6 @@ typedef NS_ENUM(NSUInteger, hudType) {
 + (NSAttributedString *)getAppclient:(int)clientType;
 + (NSString *)generateRelativeNewsString:(NSArray *)relativeNews;
 + (NSString *)GenerateTags:(NSArray *)tags;
-+ (void)analysis:(NSString *)url andNavController:(UINavigationController *)navigationController;
 
 + (NSDictionary *)timeIntervalArrayFromString:(NSString *)dateStr;
 + (NSAttributedString *)attributedTimeString:(NSString *)dateStr;
