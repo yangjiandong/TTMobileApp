@@ -136,6 +136,7 @@
 		E245C9768AD79F5A43075D21 /* 099@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E245CC088CB5A0E3FB870451 /* 099@2x.png */; };
 		E245C97A32D9EB82B8C54B72 /* 098@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E245C0985A7E17CACFAA5DFC /* 098@2x.png */; };
 		E245C9927F02254DA63360AB /* NSTextAttachment+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = E245CDB14FF15098A53F2A3C /* NSTextAttachment+Util.m */; };
+		E245C998EFC0528261F5E0CB /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E245C8B462467822670D9197 /* SideMenuViewController.m */; };
 		E245C99F72036DEC6274AD93 /* 021@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E245CE83DEB15BCD2C5F153A /* 021@2x.png */; };
 		E245C9C5BE366939A83FB598 /* shBrushCss.js in Sources */ = {isa = PBXBuildFile; fileRef = E245CFDBA3EB456066E5753A /* shBrushCss.js */; };
 		E245C9CB069CCAF1FF559757 /* UIImageView+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = E245CEA421B136333A1F3343 /* UIImageView+Util.m */; };
@@ -354,6 +355,7 @@
 		E245C83F9205BA47E34AC9E5 /* tweet.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = tweet.html; sourceTree = "<group>"; };
 		E245C87A11A71704B4FE2806 /* UIView+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Util.h"; sourceTree = "<group>"; };
 		E245C893EAD87521B0E84D61 /* 034@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "034@2x.png"; sourceTree = "<group>"; };
+		E245C8B462467822670D9197 /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
 		E245C8B83BA1E6A7C079FEB0 /* 041@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "041@2x.png"; sourceTree = "<group>"; };
 		E245C8D39762B18806C4260A /* NSTextAttachment+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextAttachment+Util.h"; sourceTree = "<group>"; };
 		E245C8E1674B58ADE31E1931 /* 016@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "016@2x.png"; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 		E245CCC762BB7212BB6BEBB7 /* GrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowingTextView.m; sourceTree = "<group>"; };
 		E245CCD890BDAB17A64530C1 /* shThemeDefault.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeDefault.css; sourceTree = "<group>"; };
 		E245CCE66DD349FA7BD9411F /* shCoreRDark.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCoreRDark.css; sourceTree = "<group>"; };
+		E245CCF6AC16A905892F4BFA /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
 		E245CCF705EA74235EE9C6A2 /* rage1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rage1@2x.png"; sourceTree = "<group>"; };
 		E245CD0B66869E4DD295FBCC /* 077@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "077@2x.png"; sourceTree = "<group>"; };
 		E245CD1AFFC5B13B90E4F368 /* 010@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "010@2x.png"; sourceTree = "<group>"; };
@@ -531,6 +534,7 @@
 				E245CAFC36482A98FA4E4A52 /* Category */,
 				E245CD7E7E0D2AFB7C2A2A65 /* Component */,
 				E245CFBEF61EE05E58A68703 /* Resources */,
+				E245CA5BEEEEB708CA12EFD2 /* Controller */,
 			);
 			path = TTMobileApp;
 			sourceTree = "<group>";
@@ -670,6 +674,15 @@
 				E245C807DC68167D5192F292 /* shThemeFadeToGrey.css */,
 			);
 			path = styles;
+			sourceTree = "<group>";
+		};
+		E245CA5BEEEEB708CA12EFD2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E245CCF6AC16A905892F4BFA /* SideMenuViewController.h */,
+				E245C8B462467822670D9197 /* SideMenuViewController.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		E245CAFC36482A98FA4E4A52 /* Category */ = {
@@ -1233,6 +1246,7 @@
 				E245C2274D1B17A507811038 /* shBrushPowerShell.js in Sources */,
 				E245C1D4B14DBE2C4BFD4794 /* shBrushAppleScript.js in Sources */,
 				E245CD3A2107080FE7C7714E /* Config.m in Sources */,
+				E245C998EFC0528261F5E0CB /* SideMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
