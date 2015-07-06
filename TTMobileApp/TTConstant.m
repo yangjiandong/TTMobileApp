@@ -37,6 +37,9 @@ NSString *const kGetUserProductsIncludeUserSQL =
 
 NSString *const kNSNotificationTheme = @"dawnAndNight";
 
+//
+//NSString *const kNSNotificationTheme = @"dawnAndNight";
+
 int const kMyListControllerPopViewFrom9 = 9;
 int const kMyListControllerPopViewFrom1 = 1;
 

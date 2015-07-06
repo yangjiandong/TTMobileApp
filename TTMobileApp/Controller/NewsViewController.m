@@ -1,6 +1,7 @@
 
 #import "NewsViewController.h"
 #import "NewsCell.h"
+#import "ExampleData.h"
 
 static NSString *kNewsCellID = @"NewsCell";
 
@@ -17,14 +18,10 @@ static NSString *kNewsCellID = @"NewsCell";
 
     if (self) {
         __weak NewsViewController *weakSelf = self;
+
         self.generateURL = ^NSString * (NSUInteger page) {
-            if (type < 4) {
-                return [NSString stringWithFormat:@"%@%@?catalog=%d&pageIndex=%lu&%@", OSCAPI_PREFIX, OSCAPI_NEWS_LIST, type, (unsigned long)page, OSCAPI_SUFFIX];
-            } else if (type == NewsListTypeAllTypeWeekHottest) {
-                return [NSString stringWithFormat:@"%@%@?show=week", OSCAPI_PREFIX, OSCAPI_NEWS_LIST];
-            } else {
-                return [NSString stringWithFormat:@"%@%@?show=month", OSCAPI_PREFIX, OSCAPI_NEWS_LIST];
-            }
+            //return [NSString stringWithFormat:@"%@%@?catalog=%d&pageIndex=%lu&%@", @"http://127.0.0.1:8003/exampledatas", @"", type, (unsigned long)page, @"pageSize=20"];
+            return [NSString stringWithFormat:@"%@", @"http://127.0.0.1:8003/exampledatas"];
         };
         
         self.tableWillReload = ^(NSUInteger responseObjectsCount) {
@@ -33,16 +30,17 @@ static NSString *kNewsCellID = @"NewsCell";
                                              (weakSelf.lastCell.status = LastCellStatusMore);}
         };
         
-        self.objClass = [OSCNews class];
+        //self.objClass = [ExampleData class];
     }
     
     return self;
 }
 
 
-- (NSArray *)parseXML:(ONOXMLDocument *)xml
+- (NSArray *)parseXML:(id)responseDocument
 {
-    return [[xml.rootElement firstChildWithTag:@"newslist"] childrenWithTag:@"news"];
+    return [responseDocument objectForKey:@"data"];
+    //return [[xml.rootElement firstChildWithTag:@"newslist"] childrenWithTag:@"news"];
 }
 
 - (void)viewDidLoad
@@ -60,7 +58,7 @@ static NSString *kNewsCellID = @"NewsCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NewsCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewsCellID forIndexPath:indexPath];
-    OSCNews *news = self.objects[indexPath.row];
+    ExampleData *news = self.objects[indexPath.row];
 
     //NSLog(@"news - %@", news.attributedCommentCount);
     // 43{
@@ -68,12 +66,12 @@ static NSString *kNewsCellID = @"NewsCell";
     //}
     cell.backgroundColor = [UIColor themeColor];
     
-    [cell.titleLabel setAttributedText:news.attributedTittle];
+    [cell.titleLabel setText:news.name];
     [cell.bodyLabel setText:news.body];
     [cell.authorLabel setText:news.author];
     cell.titleLabel.textColor = [UIColor titleColor];
-    [cell.timeLabel setAttributedText:[Utils attributedTimeString:news.pubDate]];
-    [cell.commentCount setAttributedText:news.attributedCommentCount];
+    //[cell.timeLabel setAttributedText:[Utils attributedTimeString:news.pubDate]];
+    //[cell.commentCount setAttributedText:news.attributedCommentCount];
     
     cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
     cell.selectedBackgroundView.backgroundColor = [UIColor selectCellSColor];
@@ -104,7 +102,23 @@ static NSString *kNewsCellID = @"NewsCell";
 }
 
 
+- (void)addObjects:(NSArray *)array {
+    for (NSUInteger i = 0; i < [array count]; i ++) {
+        BOOL shouldBeAdded = YES;
+        ExampleData * obj = [[ExampleData alloc] initWithAttributes:array[i]];
+        //id obj = [_objClass allo]
 
+//                  for (BaseObject *baseObj in _objects) {
+//                      if ([obj isEqual:baseObj]) {
+//                          shouldBeAdded = NO;
+//                          break;
+//                      }
+//                  }
+        if (shouldBeAdded) {
+            [self.objects addObject:obj];
+        }
+    }
+}
 
 
 

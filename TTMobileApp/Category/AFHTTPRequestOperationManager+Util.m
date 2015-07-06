@@ -15,8 +15,8 @@
 + (instancetype)OSCManager
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFOnoResponseSerializer XMLResponseSerializer];
-    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+    //manager.responseSerializer = [AFOnoResponseSerializer XMLResponseSerializer];
+    //manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
     [manager.requestSerializer setValue:[self generateUserAgent] forHTTPHeaderField:@"User-Agent"];
     
     return manager;
@@ -27,7 +27,7 @@
     NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
     NSString *IDFV = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     
-    return [NSString stringWithFormat:@"OSChina.NET/%@/%@/%@/%@/%@", appVersion,
+    return [NSString stringWithFormat:@"TTMobileApp/%@/%@/%@/%@/%@", appVersion,
             [UIDevice currentDevice].systemName,
             [UIDevice currentDevice].systemVersion,
             [UIDevice currentDevice].model,

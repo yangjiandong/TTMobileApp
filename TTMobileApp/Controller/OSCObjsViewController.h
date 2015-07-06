@@ -15,7 +15,7 @@
 #import "Utils.h"
 #import "LastCell.h"
 
-@class ONOXMLDocument;
+@class BaseObject;
 
 @interface OSCObjsViewController : UITableViewController
 
@@ -24,7 +24,7 @@
 @property (nonatomic, copy) void (^tableWillReload)(NSUInteger responseObjectsCount);
 @property (nonatomic, copy) void (^didRefreshSucceed)();
 
-@property Class objClass;
+@property Class * objClass;
 
 @property (nonatomic, assign) BOOL shouldFetchDataAfterLoaded;
 @property (nonatomic, assign) BOOL needRefreshAnimation;
@@ -38,8 +38,10 @@
 //@property(assign,nonatomic)id<anotherNetWorkingDelegate> delegate;
 @property (nonatomic, copy) void (^anotherNetWorking)();
 
-- (NSArray *)parseXML:(ONOXMLDocument *)xml;
+- (NSArray *)parseXML:(id)responseDocument;
 - (void)fetchMore;
 - (void)refresh;
+//
+- (void)addObjects:(NSArray *)array;
 
 @end
