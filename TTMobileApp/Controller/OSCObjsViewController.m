@@ -213,17 +213,11 @@
 
 - (void)addObjects:(NSArray *)array {
 
-    NSAssert(false, @"");
+    NSAssert(false, @"must proeces in subclasses");
 }
 
-//- (NSArray *)getArray:(id)responseDocument {
-//    NSArray *array = [responseDocument objectForKey:@"data"];
-//    return array;
-//}
-
-
 - (NSArray *)parseXML:(id)responseDocument{
-    NSAssert(false, @"Over ride in subclasses");
+    NSAssert(false, @"Override in subclasses");
     return nil;
 }
 
