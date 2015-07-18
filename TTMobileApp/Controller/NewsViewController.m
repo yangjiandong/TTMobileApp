@@ -21,7 +21,13 @@ static NSString *kNewsCellID = @"NewsCell";
 
         self.generateURL = ^NSString * (NSUInteger page) {
             //return [NSString stringWithFormat:@"%@%@?catalog=%d&pageIndex=%lu&%@", @"http://127.0.0.1:8003/exampledatas", @"", type, (unsigned long)page, @"pageSize=20"];
-            return [NSString stringWithFormat:@"%@", @"http://127.0.0.1:8003/exampledatas"];
+
+            if (type == NewsListTypeSynthesis){
+                return [NSString stringWithFormat:@"%@", @"http://127.0.0.1:8003/exampledatas2"];
+            } else{
+                return [NSString stringWithFormat:@"%@", @"http://127.0.0.1:8003/exampledatas"];
+            }
+
         };
         
         self.tableWillReload = ^(NSUInteger responseObjectsCount) {
@@ -81,13 +87,14 @@ static NSString *kNewsCellID = @"NewsCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //OSCNews *news = self.objects[indexPath.row];
+    ExampleData *news = self.objects[indexPath.row];
     
     self.label.font = [UIFont boldSystemFontOfSize:15];
     //[self.label setAttributedText:news.attributedTittle];
+    [self.label setText:news.name];
     CGFloat height = [self.label sizeThatFits:CGSizeMake(tableView.frame.size.width - 16, MAXFLOAT)].height;
     
-    //self.label.text = news.body;
+    self.label.text = news.body;
     self.label.font = [UIFont systemFontOfSize:13];
     height += [self.label sizeThatFits:CGSizeMake(tableView.frame.size.width - 16, MAXFLOAT)].height;
     

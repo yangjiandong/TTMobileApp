@@ -74,8 +74,8 @@
     [super viewDidLoad];
 
     nvst = [[NewsViewController alloc] initWithNewsListType:NewsListTypeNews];
-    nvst2 = [[NewsViewController alloc] initWithNewsListType:NewsListTypeNews];
-    nvst3 = [[NewsViewController alloc] initWithNewsListType:NewsListTypeNews];
+    nvst2 = [[NewsViewController alloc] initWithNewsListType:NewsListTypeSynthesis];
+    nvst3 = [[NewsViewController alloc] initWithNewsListType:NewsListTypeSoftwareRenew];
     nvst4 = [[NewsViewController alloc] initWithNewsListType:NewsListTypeNews];
 
     nvst.needCache = YES;

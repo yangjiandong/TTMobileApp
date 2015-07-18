@@ -19,7 +19,7 @@
 
 @interface SideMenuViewController ()
 
-@property (nonatomic, strong) UIViewController *reservedViewController;
+//@property (nonatomic, strong) UIViewController *reservedViewController;
 
 
 @end

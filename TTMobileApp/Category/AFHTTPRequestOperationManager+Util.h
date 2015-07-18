@@ -10,6 +10,6 @@
 
 @interface AFHTTPRequestOperationManager (Util)
 
-+ (instancetype)OSCManager;
++ (instancetype)ClientManager;
 
 @end

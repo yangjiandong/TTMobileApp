@@ -66,7 +66,7 @@
     _label.font = [UIFont boldSystemFontOfSize:14];
     _lastCell.textLabel.textColor = [UIColor titleColor];
 
-    _manager = [AFHTTPRequestOperationManager OSCManager];
+    _manager = [AFHTTPRequestOperationManager ClientManager];
 
     if (!_shouldFetchDataAfterLoaded) {return;}
     if (_needRefreshAnimation) {

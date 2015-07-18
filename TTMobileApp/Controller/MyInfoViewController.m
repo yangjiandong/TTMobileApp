@@ -16,6 +16,7 @@
 
 #import "UIFont+FontAwesome.h"
 #import "NSString+FontAwesome.h"
+#import "MyInfo.h"
 
 #import <AFNetworking.h>
 #import <AFOnoResponseSerializer.h>
@@ -26,7 +27,7 @@
 
 @interface MyInfoViewController ()
 
-//@property (nonatomic, strong) OSCMyInfo *myInfo;
+@property (nonatomic, strong) MyInfo *myInfo;
 @property (nonatomic, readonly, assign) int64_t myID;
 @property (nonatomic, strong) NSMutableArray *noticeCounts;
 
@@ -50,7 +51,9 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        
+        //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noticeUpdateHandler:) name:OSCAPI_USER_NOTICE object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userRefreshHandler:)  name:@"userRefresh"     object:nil];
+
         _noticeCounts = [NSMutableArray arrayWithArray:@[@(0), @(0), @(0), @(0), @(0)]];
     }
     
@@ -100,6 +103,25 @@
             [self.tableView reloadData];
         });
     } else {
+//        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager ClientManager];
+//
+//        [manager GET:[NSString stringWithFormat:@"%@%@?uid=%lld", OSCAPI_PREFIX, OSCAPI_MY_INFORMATION, _myID]
+//          parameters:nil
+//             success:^(AFHTTPRequestOperation *operation, ONOXMLDocument *responseDocument) {
+//                 ONOXMLElement *userXML = [responseDocument.rootElement firstChildWithTag:@"user"];
+//                 _myInfo = [[OSCMyInfo alloc] initWithXML:userXML];
+//
+//                 dispatch_async(dispatch_get_main_queue(), ^{
+//                     [self.tableView reloadData];
+//                 });
+//             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                    MBProgressHUD *HUD = [Utils createHUD];
+//                    HUD.mode = MBProgressHUDModeCustomView;
+//                    HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+//                    HUD.labelText = @"网络异常，加载失败";
+//
+//                    [HUD hide:YES afterDelay:1];
+//                }];
     }
 }
 
@@ -131,11 +153,16 @@
     _portrait.contentMode = UIViewContentModeScaleAspectFit;
     [_portrait setCornerRadius:25];
     if (_myID == 0) {
-        _portrait.image = [UIImage imageNamed:@"default-portrait"];
+        _portrait.image = [UIImage imageNamed:@"default－portrait"];
     } else {
         UIImage *portrait = [Config getPortrait];
         if (portrait == nil) {
-;
+//            [_portrait sd_setImageWithURL:_myInfo.portraitURL
+//                         placeholderImage:[UIImage imageNamed:@"default－portrait"]
+//                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//                                    [Config savePortrait:image];
+//                                    [[NSNotificationCenter defaultCenter] postNotificationName:@"userRefresh" object:@(YES)];
+//                                }];
         } else {
             _portrait.image = portrait;
         }
@@ -150,7 +177,13 @@
     if (_myID == 0) {
         //
     } else {
-
+        if (_myInfo.gender == 1) {
+            [genderImageView setImage:[UIImage imageNamed:@"userinfo_icon_male.png"]];
+            genderImageView.hidden = NO;
+        } else if (_myInfo.gender == 2){
+            [genderImageView setImage:[UIImage imageNamed:@"userinfo_icon_female"]];
+            genderImageView.hidden = NO;
+        }
     }
     [header addSubview:genderImageView];
     
