@@ -391,15 +391,15 @@
 
         [HUD hide:YES afterDelay:1];
     } else {
-//        if ([Config getOwnID] == 0) {
-//            [self.navigationController pushViewController:[LoginViewController new] animated:YES];
-//        } else {
-//            if (_myInfo) {
-//                [self.navigationController pushViewController:[[MyBasicInfoViewController alloc] initWithMyInformation:_myInfo] animated:YES];
-//            } else {
-//                [self.navigationController pushViewController:[MyBasicInfoViewController new] animated:YES];
-//            }
-//        }
+        if ([Config getOwnID] == 0) {
+            [self.navigationController pushViewController:[LoginViewController new] animated:YES];
+        } else {
+            if (_myInfo) {
+                //[self.navigationController pushViewController:[[MyBasicInfoViewController alloc] initWithMyInformation:_myInfo] animated:YES];
+            } else {
+                //[self.navigationController pushViewController:[MyBasicInfoViewController new] animated:YES];
+            }
+        }
     }
 }
 

@@ -141,8 +141,8 @@
 
     for (UIView *view in [self.view subviews]) {
         view.translatesAutoresizingMaskIntoConstraints = NO;
-        view.layer.borderColor = UIColor.grayColor.CGColor;
-        view.layer.borderWidth = 2.f;
+        //view.layer.borderColor = UIColor.grayColor.CGColor;
+        //view.layer.borderWidth = 2.f;
     }
 
     NSDictionary *views = NSDictionaryOfVariableBindings(email, password, _accountField, _passwordField, _loginButton, _registerInfo);
@@ -229,8 +229,9 @@
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager ClientManager];
 
-    [manager POST:[NSString stringWithFormat:@"%@", @"param"]
-       parameters:@{@"username" : _accountField.text, @"pwd" : _passwordField.text, @"keep_login" : @(1)}
+    [manager GET:[NSString stringWithFormat:@"%@", @"http://127.0.0.1:8003/login"]
+       //parameters:@{@"username" : _accountField.text, @"pwd" : _passwordField.text, @"keep_login" : @(1)}
+            parameters:nil
           success:^(AFHTTPRequestOperation *operation, id responseDocument) {
               Boolean success = [[responseDocument valueForKeyPath:@"success"] boolValue];
               if (!success) {
@@ -251,7 +252,7 @@
               NSString *sUser = [responseDocument valueForKeyPath:@"data"];
               OSCUser *user = [[OSCUser alloc] initWithAttributes:sUser];
               [Config saveOwnAccount:_accountField.text andPassword:_passwordField.text];
-              [Config saveOwnID:user.userID userName:user.name score:user.score favoriteCount:user.favoriteCount fansCount:user.fansCount andFollowerCount:user.followersCount];
+              [Config saveOwnID:user.userID userName:user.name score:0 favoriteCount:0 fansCount:0 andFollowerCount:0];
               [OSCThread startPollingNotice];
 
               [self saveCookies];

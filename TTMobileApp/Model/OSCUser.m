@@ -7,18 +7,19 @@
 //
 
 #import "OSCUser.h"
+#import "Tool.h"
 
-static NSString * const kID = @"uid";
-static NSString * const kUserID = @"userid";
-static NSString * const kLocation = @"location";
-static NSString * const kFrom = @"from";
-static NSString * const kName = @"name";
-static NSString * const kFollowers = @"followers";
-static NSString * const kFans = @"fans";
-static NSString * const kScore = @"score";
-static NSString * const kPortrait = @"portrait";
-static NSString * const kFavoriteCount = @"favoritecount";
-static NSString * const kExpertise = @"expertise";
+static NSString *const kID = @"uid";
+static NSString *const kUserID = @"userid";
+static NSString *const kLocation = @"location";
+static NSString *const kFrom = @"from";
+static NSString *const kName = @"name";
+static NSString *const kFollowers = @"followers";
+static NSString *const kFans = @"fans";
+static NSString *const kScore = @"score";
+static NSString *const kPortrait = @"portrait";
+static NSString *const kFavoriteCount = @"favoritecount";
+static NSString *const kExpertise = @"expertise";
 
 @interface OSCUser ()
 
@@ -32,19 +33,19 @@ static NSString * const kExpertise = @"expertise";
     self = [super init];
     if (!self) {return nil;}
 
-    _userID = (int64_t) [attributes[@"uid"] pointerValue];
+    _userID = (int64_t) [attributes[@"userID"] pointerValue];
+    _name = [Tool checkNSNullClass:attributes[@"name"]];
     // TODO
 
     return self;
 }
 
 
-- (BOOL)isEqual:(id)object
-{
+- (BOOL)isEqual:(id)object {
     if ([self class] == [object class]) {
-        return _userID == ((OSCUser *)object).userID;
+        return _userID == ((OSCUser *) object).userID;
     }
-    
+
     return NO;
 }
 
